@@ -18,21 +18,21 @@ fn main()
     let b: i32 = read_ln(&mut b);
     let mut c = String::new();
     let c: i32 = read_ln(&mut c);
-    loop
-    {
-        let mb: i32 = (b/a)* -1 as i32;
-        let ma: i32 = (c/a) as i32;
-        let i = rand::thread_rng().gen_range(-500,501); 
-        let x = rand::thread_rng().gen_range(-500,501); 
-        if i+x == mb && i*x == ma
+    'outer: for i in -500..501 {
+        for x in -500..501
         {
-            println!("x1={} and x2={}",i,x);
-            break;
-            
-        }
-         else {
-            println!("with {} and {} its wrong", i, x);
-            println!("{} {}", mb, ma);
+            let mb: i32 = (b/a)* -1 as i32;
+            let ma: i32 = (c/a) as i32;
+            if i+x == mb && i*x == ma
+            {
+                println!("x1={} and x2={}",i,x);
+                break 'outer;
+                
+            }
+            else {
+                println!("with {} and {} its wrong", i, x);
+                println!("{} {}", mb, ma);
+            }
         }
     }
 }
